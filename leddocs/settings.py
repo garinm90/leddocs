@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # Third party applications
     "rest_framework",
+    "oauth2_provider",
     # My applications
     "jobs",
 ]

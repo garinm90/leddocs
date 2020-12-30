@@ -23,13 +23,27 @@ environ.Env.read_env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-DEBUG = env("DEBUG")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env("SECRET_KEY")
+
+
+DEBUG = env("DEBUG")
+
+
+AUTH_KEYS = {
+    "GOOGLE_OAUTH2_KEY",
+    "GOOGLE_OAUTH2_SECRET",
+    "FACEBOOK_KEY",
+    "FACEBOOK_SECRET",
+}
+
+# Loop through list of keys and convert them into module level variables
+for key in AUTH_KEYS:
+    globals()[f"SOCIAL_AUTH_{key}"] = env(key)
 
 
 ALLOWED_HOSTS = []

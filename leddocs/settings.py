@@ -11,19 +11,26 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import environ
+
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
+environ.Env.read_env()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+DEBUG = env("DEBUG")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "lnffpe!lb+97=j)miz7h&jx4ph+2mbe+r*-+7g3exa^3$+1w6z"
+SECRET_KEY = env("SECRET_KEY")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -39,9 +46,12 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # Third party applications
     "rest_framework",
+    "rest_framework.authtoken",
+    "social_django",
     "oauth2_provider",
     # My applications
     "jobs",
+    "users",
 ]
 
 MIDDLEWARE = [
@@ -104,6 +114,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Django user override
+AUTH_USER_MODEL = "users.User"
+LOGIN_URL = "/admin/login/"
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
@@ -123,3 +137,22 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = "/static/"
+
+# DRF Configuration
+# Add authentication permission to check if a user is authed
+# Set DRF to use TokenAuth
+
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework.authentication.TokenAuthentication",
+    ),
+}
+
+# social-auth backends to use for authentication
+
+AUTHENTICATION_BACKENDS = (
+    "social_core.backends.google.GoogleOAuth2",
+    "social_core.backends.facebook.FacebookOAuth2",
+    "django.contrib.auth.backends.ModelBackend",
+)

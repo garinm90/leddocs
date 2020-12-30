@@ -61,8 +61,6 @@ INSTALLED_APPS = [
     # Third party applications
     "rest_framework",
     "rest_framework.authtoken",
-    "social_django",
-    "oauth2_provider",
     # My applications
     "jobs",
     "users",
@@ -153,7 +151,7 @@ USE_TZ = True
 STATIC_URL = "/static/"
 
 # DRF Configuration
-# Add authentication permission to check if a user is authed
+# Add authentication permission to check if a user is authenticated
 # Set DRF to use TokenAuth
 
 REST_FRAMEWORK = {
@@ -166,7 +164,7 @@ REST_FRAMEWORK = {
 # social-auth backends to use for authentication
 
 AUTHENTICATION_BACKENDS = (
-    "social_core.backends.google.GoogleOAuth2",
-    "social_core.backends.facebook.FacebookOAuth2",
+    # "social_core.backends.google.GoogleOAuth2",
+    # "social_core.backends.facebook.FacebookOAuth2",
     "django.contrib.auth.backends.ModelBackend",
 )

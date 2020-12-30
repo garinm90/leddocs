@@ -9,6 +9,7 @@ djangorestframework = "*"
 social-auth-core = "*"
 django-environ = "*"
 social-auth-app-django = "*"
+djangorestframework-simplejwt = "*"
 
 [dev-packages]
 black = "*"

@@ -33,24 +33,9 @@ SECRET_KEY = env("SECRET_KEY")
 
 DEBUG = env("DEBUG")
 
-
-AUTH_KEYS = {
-    "GOOGLE_OAUTH2_KEY",
-    "GOOGLE_OAUTH2_SECRET",
-    "FACEBOOK_KEY",
-    "FACEBOOK_SECRET",
-}
-
-# Loop through list of keys and convert them into module level variables
-for key in AUTH_KEYS:
-    globals()[f"SOCIAL_AUTH_{key}"] = env(key)
-
-
 ALLOWED_HOSTS = []
 
-
 # Application definition
-
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -58,9 +43,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
     # Third party applications
     "rest_framework",
     "rest_framework.authtoken",
+    "oauth2_provider",
+    "social_django",
+    "drf_social_oauth2",
     # My applications
     "jobs",
     "users",
@@ -76,12 +65,11 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "leddocs.urls"
 
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -149,22 +137,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = "/static/"
-
-# DRF Configuration
-# Add authentication permission to check if a user is authenticated
-# Set DRF to use TokenAuth
-
-REST_FRAMEWORK = {
-    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
-    "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework.authentication.TokenAuthentication",
-    ),
-}
-
-# social-auth backends to use for authentication
-
-AUTHENTICATION_BACKENDS = (
-    # "social_core.backends.google.GoogleOAuth2",
-    # "social_core.backends.facebook.FacebookOAuth2",
-    "django.contrib.auth.backends.ModelBackend",
-)

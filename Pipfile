@@ -6,10 +6,9 @@ name = "pypi"
 [packages]
 django = "*"
 djangorestframework = "*"
-django-oauth-toolkit = "*"
 social-auth-core = "*"
-social-auth-app-django = "*"
 django-environ = "*"
+social-auth-app-django = "*"
 
 [dev-packages]
 black = "*"

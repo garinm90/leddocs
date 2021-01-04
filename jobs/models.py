@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models.base import Model
 from django.db.models.deletion import CASCADE
+from django.db.models.fields import NullBooleanField
 
 
 class Job(models.Model):
@@ -8,13 +9,12 @@ class Job(models.Model):
     ride = models.ForeignKey("Ride", on_delete=models.SET_NULL, null=True)
     job_date = models.DateField()
     job_start_date = models.DateField(auto_now_add=True)
-    job_end_date = models.DateField()
+    job_end_date = models.DateField(blank=True, null=True)
     last_updated_date = models.DateField(auto_now=True)
-    # number_of_lights = models.PositiveIntegerField()
     light = models.ManyToManyField("Light", related_name="lights", through="LightCount")
 
     def __str__(self) -> str:
-        return f"Work done for {self.company} on {self.ride} job date: {self.job_date}"
+        return f"Work done for {self.customer.company} on {self.ride} job date: {self.job_date}"
 
 
 class Customer(models.Model):

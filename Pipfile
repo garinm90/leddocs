@@ -8,6 +8,8 @@ django = "*"
 djangorestframework = "*"
 faker = "*"
 factory-boy = "*"
+django-crispy-forms = "*"
+django-autocomplete-light = "*"
 
 [dev-packages]
 black = "*"

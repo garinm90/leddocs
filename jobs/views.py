@@ -37,3 +37,58 @@ class JobListView(ListView):
 class JobCreateView(CreateView):
     model = Job
     fields = "__all__"
+
+
+class JobUpdateView(UpdateView):
+    model = Job
+
+
+class RideDetailView(DetailView):
+    model = Ride
+
+
+class RideCreateView(CreateView):
+    model = Ride
+    fields = "__all__"
+
+
+class RideUpdateView(UpdateView):
+    model = Ride
+
+
+class RideListView(ListView):
+    model = Ride
+
+
+class CustomerDetailView(DetailView):
+    model = Customer
+
+
+class CustomerCreateView(CreateView):
+    model = Customer
+    fields = "__all__"
+
+
+class CustomerUpdateView(UpdateView):
+    model = Customer
+
+
+class CustomerListView(ListView):
+    model = Customer
+
+
+class LightDetailView(DetailView):
+    model = Light
+
+
+class LightCreateView(CreateView):
+    model = Light
+    fields = "__all__"
+
+
+class LightUpdateView(UpdateView):
+    model = Light
+
+
+class LightListView(ListView):
+    model = Light

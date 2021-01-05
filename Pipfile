@@ -10,6 +10,7 @@ faker = "*"
 factory-boy = "*"
 django-crispy-forms = "*"
 django-autocomplete-light = "*"
+django-debug-toolbar = "*"
 
 [dev-packages]
 black = "*"

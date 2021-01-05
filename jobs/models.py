@@ -31,6 +31,9 @@ class Customer(models.Model):
     def __str__(self) -> str:
         return self.primary_contact
 
+    def get_absolute_url(self):
+        return reverse("detail_customer", args=[str(self.id)])
+
 
 class Ride(models.Model):
     ride_name = models.CharField(max_length=50)
@@ -40,6 +43,9 @@ class Ride(models.Model):
     def __str__(self) -> str:
         return self.ride_name
 
+    def get_absolute_url(self):
+        return reverse("detail_ride", args=[str(self.id)])
+
 
 class Light(models.Model):
     light_style = models.CharField(max_length=50)
@@ -47,6 +53,9 @@ class Light(models.Model):
 
     def __str__(self) -> str:
         return f"{self.light_style} {self.number_of_leds}"
+
+    def get_absolute_url(self):
+        return reverse("detail_light", args=[str(self.id)])
 
 
 class LightCount(models.Model):

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}{{ job.customer.primary_contact }}{% endblock %}
+
+
+{% block content %}
+<div class="row">
+    <ul>
+        <li>{{ job.customer }}</li>
+        <li>{{ job.ride }}</li>
+        <li>{{ job.job_start_date }}</li>
+        <li>{{ job.job_end_date }}</li>
+        <li>{{ job.last_updated_date }}</li>
+    </ul>
+    {{ lights}}
+</div>
+
+{% endblock %}

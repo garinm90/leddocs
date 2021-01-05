@@ -53,3 +53,6 @@ class LightCount(models.Model):
     number_of_lights = models.PositiveIntegerField()
     light = models.ForeignKey(Light, on_delete=models.SET_NULL, null=True)
     job = models.ForeignKey(Job, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self) -> str:
+        return f"{self.number_of_lights} {self.light}"

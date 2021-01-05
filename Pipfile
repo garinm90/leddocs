@@ -11,6 +11,7 @@ factory-boy = "*"
 django-crispy-forms = "*"
 django-autocomplete-light = "*"
 django-debug-toolbar = "*"
+django-widget-tweaks = "*"
 
 [dev-packages]
 black = "*"

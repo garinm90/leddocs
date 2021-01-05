@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # Third party applications
     "rest_framework",
     "debug_toolbar",
+    "widget_tweaks",
     # My applications
     "jobs",
     "users",

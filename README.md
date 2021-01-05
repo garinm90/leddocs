@@ -11,7 +11,7 @@ Django 3
 ## Todo
 
 - Add applications for other departments currently only the head office is setup
-  
+
 - Add user login and permissions to control department access.
 
 - Migrate to postgres DB for concurrent writes.

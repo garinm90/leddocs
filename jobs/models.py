@@ -1,7 +1,9 @@
 from django.db import models
-from django.db.models.base import Model
-from django.db.models.deletion import CASCADE
-from django.db.models.fields import NullBooleanField
+from django.urls import reverse
+
+# from django.db.models.base import Model
+# from django.db.models.deletion import CASCADE
+# from django.db.models.fields import NullBooleanField
 
 
 class Job(models.Model):
@@ -13,8 +15,11 @@ class Job(models.Model):
     last_updated_date = models.DateField(auto_now=True)
     light = models.ManyToManyField("Light", related_name="lights", through="LightCount")
 
+    def get_absolute_url(self):
+        return reverse("detail_job", args=[str(self.id)])
+
     def __str__(self) -> str:
-        return f"Work done for {self.customer.company} on {self.ride} job date: {self.job_date}"
+        return f"{self.customer.primary_contact}'s on {self.ride} start date: {self.job_start_date:%m-%d-%Y}"
 
 
 class Customer(models.Model):

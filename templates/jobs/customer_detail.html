@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}{{ customer.primary_contact }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <h3>{{ customer }}</h3>
+    <div class="col-4">
+        <h4>
+            Rides
+        </h4>
+        <ul class="list-group list-group-flush">
+            {% for ride in customer.rides.all %}
+                <li class="list-group-item">{{ ride }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="col-4">
+        <h4>Jobs</h4>
+        <ul class="list-group list-group-flush">
+            {% for job in customer.jobs.all %}
+                <li class="list-group-item">
+                    Work done on {{ job.ride }} started on {{ job.job_start_date }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

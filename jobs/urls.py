@@ -1,9 +1,11 @@
 from django.urls import path
+
 from .views import (
     IndexView,
     JobCreateView,
     JobDetailView,
     JobListView,
+    JobUpdateView,
     RideCreateView,
     RideDetailView,
     RideListView,
@@ -20,6 +22,7 @@ from .views import (
 urlpatterns = [
     path("", IndexView.as_view(), name="index"),
     path("job/<int:pk>", JobDetailView.as_view(), name="detail_job"),
+    path("job/<int:pk>/update", JobUpdateView.as_view(), name="update_job"),
     path("jobs", JobListView.as_view(), name="list_jobs"),
     path("job/new", JobCreateView.as_view(), name="create_job"),
     path("ride/<int:pk>", RideDetailView.as_view(), name="detail_ride"),

@@ -2,6 +2,7 @@ from django.urls import reverse_lazy
 from django.views.generic.base import RedirectView
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
+from dal.autocomplete import Select2QuerySetView
 
 from .models import Job, Customer, Ride, Light, LightCount
 from .forms import JobForm
@@ -32,13 +33,13 @@ class JobListView(ListView):
 class JobCreateView(CreateView):
     model = Job
     fields = "__all__"
-    form = JobForm
+    # form_class = JobForm
 
 
 class JobUpdateView(UpdateView):
     model = Job
-    # fields = "__all__"
-    form_class = JobForm
+    fields = "__all__"
+    # form_class = JobForm
 
 
 class RideDetailView(DetailView):
@@ -94,3 +95,11 @@ class LightUpdateView(UpdateView):
 
 class LightListView(ListView):
     model = Light
+
+
+class CustomerAutoComplete(Select2QuerySetView):
+    def get_queryset(self):
+        if not self.request.user.is_authenticated:
+            return Customer.objects.none()
+        qs = Customer.objects.all()
+        return qs

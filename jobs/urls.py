@@ -16,6 +16,7 @@ from .views import (
     LightCreateView,
     LightDetailView,
     LightListView,
+    CustomerAutoComplete,
 )
 
 
@@ -37,4 +38,9 @@ urlpatterns = [
     path("light/<int:pk>", LightDetailView.as_view(), name="detail_light"),
     path("lights", LightListView.as_view(), name="list_lights"),
     path("light/new", LightCreateView.as_view(), name="create_light"),
+    path(
+        "customer/autocomplete",
+        CustomerAutoComplete.as_view(),
+        name="autocomplete_customer",
+    ),
 ]

@@ -25,13 +25,5 @@
         <div class="col-12">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
-        {% for field in form %}
-    <div class="fieldWrapper">
-        {{ field.errors }}
-        {% if field.help_text %}
-        <p class="help">{{ field.help_text|safe }}</p>
-        {% endif %}
-    </div>
-{% endfor %}
 </form>
 {% endblock %}

@@ -51,10 +51,12 @@ class RideUpdateView(UpdateView):
 
 class RideListView(ListView):
     model = Ride
+    context_object_name = "ride_list"
 
 
 class CustomerDetailView(DetailView):
     model = Customer
+    context_object_name = "customer"
 
 
 class CustomerCreateView(CreateView):
@@ -68,6 +70,7 @@ class CustomerUpdateView(UpdateView):
 
 class CustomerListView(ListView):
     model = Customer
+    context_object_name = "customer_list"
 
 
 class LightDetailView(DetailView):

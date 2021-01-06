@@ -31,9 +31,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "dal",
-    "dal_select2",
-    "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -46,6 +43,10 @@ INSTALLED_APPS = [
     # My applications
     "jobs",
     "users",
+    "dal",
+    "dal_select2",
+    "dal_queryset_sequence",
+    "django.contrib.admin",
 ]
 
 MIDDLEWARE = [

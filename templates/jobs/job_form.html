@@ -1,13 +1,31 @@
 {% extends "base.html" %}
-
-{% block title %}Create Job{% endblock %}
-
+{% load widget_tweaks %}
 
 {% block content %}
-<form action="/your-name/" method="post">
+<form class="row g-2" method="POST">
     {% csrf_token %}
-    {{ form.ride }}
-    <input type="submit" value="Submit">
+        <div class="col-4">
+                <label for="{{ form.customer.id_for_label }}" class="form-label">Customer:</label>
+                <!-- {{ form.customer }} -->
+                {% render_field form.customer class+="" %}
+        </div>
+        <div class="col-4">
+            <label for="{{ form.ride.id_for_label }}" class="form-label">Ride:</label>
+            {% render_field form.ride class+="form-select" %}
+        </div>
+        <!-- Hack to force columns onto next row! -->
+        <div class="w-100"></div>
+        <div class="col-4">
+            <label for="{{ form.light.id_for_label }}" class="form-label">Lights: </label>
+            {% render_field form.light class+="form-select" %}
+        </div>
+        <div class="col-4">
+            <label for="{{ form.primary_phone_number.id_for_label }}" class="form-label">Phone Number</label>
+            {% render_field form.primary_phone_number|attr:"type:tel" class+="form-control" %}
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
 </form>
 
 {% endblock %}

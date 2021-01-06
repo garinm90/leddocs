@@ -2,7 +2,9 @@ from django.urls import reverse_lazy
 from django.views.generic.base import RedirectView
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
+
 from .models import Job, Customer, Ride, Light, LightCount
+from .forms import JobForm
 
 
 class IndexView(RedirectView):
@@ -30,10 +32,13 @@ class JobListView(ListView):
 class JobCreateView(CreateView):
     model = Job
     fields = "__all__"
+    form = JobForm
 
 
 class JobUpdateView(UpdateView):
     model = Job
+    # fields = "__all__"
+    form_class = JobForm
 
 
 class RideDetailView(DetailView):

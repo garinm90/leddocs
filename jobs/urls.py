@@ -8,6 +8,7 @@ from .views import (
     RideDetailView,
     RideListView,
     CustomerCreateView,
+    CustomerUpdateView,
     CustomerDetailView,
     CustomerListView,
     LightCreateView,
@@ -25,6 +26,9 @@ urlpatterns = [
     path("rides", RideListView.as_view(), name="list_rides"),
     path("ride/new", RideCreateView.as_view(), name="create_ride"),
     path("customer/<int:pk>", CustomerDetailView.as_view(), name="detail_customer"),
+    path(
+        "customer/<int:pk>/update", CustomerUpdateView.as_view(), name="update_customer"
+    ),
     path("customers", CustomerListView.as_view(), name="list_customers"),
     path("customer/new", CustomerCreateView.as_view(), name="create_customer"),
     path("light/<int:pk>", LightDetailView.as_view(), name="detail_light"),

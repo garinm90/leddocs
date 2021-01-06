@@ -59,13 +59,14 @@ class CustomerDetailView(DetailView):
     context_object_name = "customer"
 
 
-class CustomerCreateView(CreateView):
+class CustomerUpdateView(UpdateView):
     model = Customer
     fields = "__all__"
 
 
-class CustomerUpdateView(UpdateView):
+class CustomerCreateView(CreateView):
     model = Customer
+    fields = "__all__"
 
 
 class CustomerListView(ListView):

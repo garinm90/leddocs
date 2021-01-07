@@ -53,6 +53,7 @@ class RideCreateView(CreateView):
 
 class RideUpdateView(UpdateView):
     model = Ride
+    fields = "__all__"
 
 
 class RideListView(ListView):
@@ -103,5 +104,5 @@ class CustomerAutoComplete(Select2QuerySetView):
             return Customer.objects.none()
         qs = Customer.objects.all()
         if self.q:
-            qs = qs.filter(primary_contact__istartswith=self.q)
+            qs = qs.filter(primary_contact__icontains=self.q)
         return qs

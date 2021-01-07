@@ -32,14 +32,14 @@ class JobListView(ListView):
 
 class JobCreateView(CreateView):
     model = Job
-    fields = "__all__"
-    # form_class = JobForm
+    # fields = "__all__"
+    form_class = JobForm
 
 
 class JobUpdateView(UpdateView):
     model = Job
-    fields = "__all__"
-    # form_class = JobForm
+    # fields = "__all__"
+    form_class = JobForm
 
 
 class RideDetailView(DetailView):
@@ -102,4 +102,6 @@ class CustomerAutoComplete(Select2QuerySetView):
         if not self.request.user.is_authenticated:
             return Customer.objects.none()
         qs = Customer.objects.all()
+        if self.q:
+            qs = qs.filter(primary_contact__istartswith=self.q)
         return qs

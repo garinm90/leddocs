@@ -3,20 +3,25 @@ require("regenerator-runtime/runtime");
 
 const selectField = document.querySelector("#id_customer");
 const inputField = document.createElement("input");
+inputField.id = "id_customer";
+inputField.setAttribute("type", "text");
+selectField.replaceWith(inputField);
 
-new autoComplete({
+const autoCompleteJS = new autoComplete({
   data: {
     src: async () => {
-      const query = document.querySelector("#id_customer").nodeValue;
+      const query = document.querySelector("#id_customer").value;
       const source = await fetch(
         "https://127.0.0.1:8000/customer/autocomplete"
       );
       const data = await source.json();
+      console.log(data);
       return data.results;
     },
-    key: ["title"],
+    key: ["results"],
     cache: false,
   },
+  trigger: ["input", "focus"],
   noResults: (dataFeedback, generateList) => {
     // Generate autoComplete List
     generateList(autoCompleteJS, dataFeedback, dataFeedback.results);

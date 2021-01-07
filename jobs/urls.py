@@ -17,6 +17,7 @@ from .views import (
     LightDetailView,
     LightListView,
     CustomerAutoComplete,
+    RideUpdateView,
 )
 
 
@@ -27,6 +28,7 @@ urlpatterns = [
     path("jobs", JobListView.as_view(), name="list_jobs"),
     path("job/new", JobCreateView.as_view(), name="create_job"),
     path("ride/<int:pk>", RideDetailView.as_view(), name="detail_ride"),
+    path("ride/<int:pk>/update", RideUpdateView.as_view(), name="update_ride"),
     path("rides", RideListView.as_view(), name="list_rides"),
     path("ride/new", RideCreateView.as_view(), name="create_ride"),
     path("customer/<int:pk>", CustomerDetailView.as_view(), name="detail_customer"),

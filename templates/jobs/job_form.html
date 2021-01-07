@@ -7,9 +7,8 @@
 <form class="row g-2" method="POST">
     {% csrf_token %}
         <div class="col-4">
-                <label for="{{ form.customer.id_for_label }}" class="form-label">Customer:</label>
-
-                {% render_field form.customer class+="form-control" %}
+                <label for="{{ form.customer.id_for_label }}" class="form-label mb-3">Customer:</label><br>
+                {{form.customer}}
         </div>
         <div class="col-4">
             <label for="{{ form.ride.id_for_label }}" class="form-label">Ride:</label>
@@ -18,8 +17,8 @@
         <!-- Hack to force columns onto next row! -->
         <div class="w-100"></div>
         <div class="col-4">
-            <label for="{{ form.light.id_for_label }}" class="form-label">Lights: </label>
-            {% render_field form.light class+="form-select" %}
+            <label for="{{ form.light.id_for_label }}" class="form-check-label">Lights: </label>
+            {% render_field form.light class+="" %}
         </div>
         <div class="col-4">
             <label for="{{ form.primary_phone_number.id_for_label }}" class="form-label">Phone Number</label>

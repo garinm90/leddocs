@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Home Page{% endblock %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <h3>Rides</h3>
+        <div class="list-group list-group-flush">
+            {% for ride in ride_list %}
+            <a href="{{ ride.get_absolute_url }}" class="list-group-item list-group-item-action">{{ ride }}</a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="d-flex align-items-center">
+            <h3><a class="mx-3 text-reset" href="{% url 'create_ride' %}">Add Ride<i class="m x-1 fas fa-plus"></i></a></h3>
+        </div>
+        {% for ride in ride_list %}
+            <div class="row mt-1">
+                <div class="btn-group btn-group">
+                    <a href="{% url 'detail_ride' ride.id %}"><button class="btn btn-primary mx-1">Details</button></a>
+                    <a href="{% url 'update_ride' ride.id %}"><button class="btn btn-warning mx-1">Edit</button></a>
+                <!-- <a href=""><button class="btn btn-danger mx-1">Delete</button></a> -->
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

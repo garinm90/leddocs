@@ -1,0 +1,35 @@
+{
+  "name": "leddocs",
+  "version": "1.0.0",
+  "description": "This server provides functionality to help move away from paper documentation.  Includes DRF to provide APIs for use with other in house software.",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/garinm90/leddocs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/garinm90/leddocs/issues"
+  },
+  "homepage": "https://github.com/garinm90/leddocs#readme",
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.0.1",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.11.1",
+    "webpack-cli": "^4.3.1"
+  },
+  "dependencies": {
+    "@tarekraafat/autocomplete.js": "^8.2.1",
+    "lodash": "^4.17.20",
+    "regenerator-runtime": "^0.13.7"
+  }
+}

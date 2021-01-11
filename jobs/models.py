@@ -58,7 +58,7 @@ class Light(models.Model):
         return f"{self.light_style} {self.number_of_leds}"
 
     def get_absolute_url(self):
-        return reverse("detail_light", args=[str(self.id)])
+        return reverse("list_lights")
 
 
 class LightCount(models.Model):

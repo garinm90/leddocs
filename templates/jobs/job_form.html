@@ -29,9 +29,14 @@
         </div>
 </form>
 
-<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
 
 {{ form.media }}
+
+{% block javascript %}
+<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/jquery-file-upload/vendor/jquery.ui.widget.js' %}"></script>
+<script src="{% static 'js/jquery-file-upload/jquery.iframe-transport.js' %}"></script>
+<script src="{% static 'js/jquery-file-upload/jquery.fileupload.js' %}"></script>
 
 <script>
     (function($) {
@@ -53,6 +58,7 @@
         })
     })($)
     </script>
+{% endblock %}
 
 
 {% endblock %}

@@ -38,6 +38,7 @@
         {% block content %}<!-- default content text (typically empty) -->{% endblock %}
     </div>
       <script src="{% static 'js/bootstrap.bundle.min.js' %}" ></script>
-
+      {% block javascript %}
+      {% endblock %}
       </body>
 </html>

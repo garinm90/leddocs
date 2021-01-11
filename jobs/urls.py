@@ -18,6 +18,7 @@ from .views import (
     LightListView,
     CustomerAutoComplete,
     RideUpdateView,
+    ImageCreateView,
 )
 
 
@@ -45,4 +46,5 @@ urlpatterns = [
         CustomerAutoComplete.as_view(),
         name="autocomplete_customer",
     ),
+    path("upload/<int:pk>", ImageCreateView.as_view(), name="upload_image"),
 ]

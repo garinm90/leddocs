@@ -4,7 +4,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
 from dal.autocomplete import Select2QuerySetView
 
-from .models import Job, Customer, Ride, Light, LightCount
+from .models import Job, Customer, Ride, Light, LightCount, Image
 from .forms import JobForm
 
 
@@ -70,6 +70,13 @@ class CustomerUpdateView(UpdateView):
     model = Customer
     fields = "__all__"
 
+    def get_form_kwargs(self):
+        """Return the keyword arguments for instantiating the form."""
+        kwargs = super().get_form_kwargs()
+        if hasattr(self, "object"):
+            kwargs.update({"instance": self.object})
+        return kwargs
+
 
 class CustomerCreateView(CreateView):
     model = Customer
@@ -106,3 +113,21 @@ class CustomerAutoComplete(Select2QuerySetView):
         if self.q:
             qs = qs.filter(primary_contact__icontains=self.q)
         return qs
+
+
+class ImageCreateView(CreateView):
+    model = Image
+    fields = ("image", "job")
+
+    def get_form_kwargs(self):
+        """Return the keyword arguments for instantiating the form."""
+        kwargs = super().get_form_kwargs()
+        if hasattr(self, "object"):
+            kwargs.update({"instance": self.object})
+        print(kwargs)
+        return kwargs
+
+    def get_initial(self):
+        """Return the initial data to use for forms on this view."""
+        self.initial.update({"job": self.kwargs["pk"]})
+        return self.initial.copy()

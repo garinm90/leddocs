@@ -1,10 +1,6 @@
 from django.db import models
 from django.urls import reverse
 
-# from django.db.models.base import Model
-# from django.db.models.deletion import CASCADE
-# from django.db.models.fields import NullBooleanField
-
 
 class Job(models.Model):
     customer = models.ForeignKey(
@@ -68,3 +64,14 @@ class LightCount(models.Model):
 
     def __str__(self) -> str:
         return f"{self.number_of_lights} {self.light}"
+
+
+def job_directory_path(instance, filename):
+    return "job_{0}/{1}".format(instance.job.id, filename)
+
+
+class Image(models.Model):
+    job = models.ForeignKey(
+        Job, on_delete=models.SET_NULL, null=True, related_name="images"
+    )
+    image = models.ImageField(upload_to=job_directory_path)

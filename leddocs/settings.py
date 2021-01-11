@@ -37,15 +37,16 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # Third party applications
-    "rest_framework",
-    "debug_toolbar",
-    "widget_tweaks",
-    # My applications
-    "jobs",
-    "users",
     "dal",
     "dal_select2",
     "dal_queryset_sequence",
+    "rest_framework",
+    "debug_toolbar",
+    "widget_tweaks",
+    "extra_views",
+    # My applications
+    "jobs",
+    "users",
     "django.contrib.admin",
 ]
 

@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     # My applications
     "jobs",
     "users",
+    "grappelli",
     "django.contrib.admin",
 ]
 
@@ -126,8 +127,7 @@ USE_L10N = True
 USE_TZ = True
 
 MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "/media/"
-
+MEDIA_ROOT = BASE_DIR / "media"
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 

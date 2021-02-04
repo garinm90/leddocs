@@ -1,11 +1,25 @@
 from django.urls import reverse_lazy
+from django.http import HttpResponseRedirect
 from django.views.generic.base import RedirectView
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
 from dal.autocomplete import Select2QuerySetView
+from rest_framework import viewsets
 
+from .serializers import (
+    JobSerializer,
+    RideSerializer,
+    CustomerSerializer,
+    LightSerializer,
+    ImageSerializer,
+)
 from .models import Job, Customer, Ride, Light, LightCount, Image
-from .forms import JobForm
+from .forms import JobForm, ImageForm
+
+
+class JobViewSet(viewsets.ModelViewSet):
+    serializer_class = JobSerializer
+    queryset = Job.objects.all()
 
 
 class IndexView(RedirectView):
@@ -17,9 +31,7 @@ class JobDetailView(DetailView):
     context_object_name = "job"
 
     def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
-        # Add in a QuerySet of all the books
         job_pk = self.kwargs.get(self.pk_url_kwarg)
         context["lights"] = LightCount.objects.filter(job__pk=job_pk)
         return context
@@ -34,6 +46,23 @@ class JobCreateView(CreateView):
     model = Job
     # fields = "__all__"
     form_class = JobForm
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['formset'] = JobImageFormSet()
+    #     return context
+
+    # def post(self, request, *args, **kwargs):
+    #     formset = JobImageFormSet(request.POST)
+    #     form = self.get_form(JobForm)
+    #     if formset.is_valid() and form.is_valid():
+    #         return self.form_valid(formset,form)
+
+    # def form_valid(self, form, formset,):
+    #     object = form.save()
+    #     formset.instance = self.object
+    #     formset.save()
+    #     return HttpResponseRedirect('/jobs/')
 
 
 class JobUpdateView(UpdateView):
@@ -115,19 +144,16 @@ class CustomerAutoComplete(Select2QuerySetView):
         return qs
 
 
+class JobAutoComplete(Select2QuerySetView):
+    def get_queryset(self):
+        if not self.request.user.is_authenticated:
+            return Job.objects.none()
+        qs = Job.objects.all()
+        if self.q:
+            qs = qs.filter(customer__icontains=self.q)
+        return qs
+
+
 class ImageCreateView(CreateView):
     model = Image
-    fields = ("image", "job")
-
-    def get_form_kwargs(self):
-        """Return the keyword arguments for instantiating the form."""
-        kwargs = super().get_form_kwargs()
-        if hasattr(self, "object"):
-            kwargs.update({"instance": self.object})
-        print(kwargs)
-        return kwargs
-
-    def get_initial(self):
-        """Return the initial data to use for forms on this view."""
-        self.initial.update({"job": self.kwargs["pk"]})
-        return self.initial.copy()
+    form_class = ImageForm

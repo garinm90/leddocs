@@ -1,4 +1,5 @@
 from django.urls import path
+from rest_framework import routers
 
 from .views import (
     IndexView,
@@ -6,6 +7,7 @@ from .views import (
     JobDetailView,
     JobListView,
     JobUpdateView,
+    JobViewSet,
     RideCreateView,
     RideDetailView,
     RideListView,
@@ -19,7 +21,11 @@ from .views import (
     CustomerAutoComplete,
     RideUpdateView,
     ImageCreateView,
+    JobAutoComplete,
 )
+
+router = routers.SimpleRouter()
+router.register("jobs", JobViewSet)
 
 
 urlpatterns = [
@@ -46,5 +52,6 @@ urlpatterns = [
         CustomerAutoComplete.as_view(),
         name="autocomplete_customer",
     ),
-    path("upload/<int:pk>", ImageCreateView.as_view(), name="upload_image"),
+    path("job/autocomplete", JobAutoComplete.as_view(), name="autocomplete_job"),
+    path("upload/", ImageCreateView.as_view(), name="upload_image"),
 ]

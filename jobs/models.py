@@ -67,7 +67,8 @@ class LightCount(models.Model):
 
 
 def job_directory_path(instance, filename):
-    return "job_{0}/{1}".format(instance.job.id, filename)
+    print("job_{0}/{1}".format(instance.job.job_date, filename))
+    return "job_{0}/{1}".format(instance.job.job_date, filename)
 
 
 class Image(models.Model):
@@ -75,3 +76,6 @@ class Image(models.Model):
         Job, on_delete=models.SET_NULL, null=True, related_name="images"
     )
     image = models.ImageField(upload_to=job_directory_path)
+
+    def get_absolute_url(self):
+        return reverse("detail_customer", args=[str(self.job.id)])

@@ -5,7 +5,7 @@
 {% block content %}
 <div class="row">
     <div class="col-md-4">
-        <h3>Customers</h3>
+        <h3 >Customers</h3>
         <div class="list-group list-group-flush">
             {% for customer in customer_list %}
             <a href="{{ customer.get_absolute_url }}" class="list-group-item list-group-item-action">{{ customer }}</a>
@@ -13,11 +13,11 @@
         </div>
     </div>
     <div class="col-md-7">
-        <div class="d-flex align-items-center">
-            <a class="mx-2 text-reset pt-3" href="{% url 'create_customer' %}">Add Customer<i class="mx-1 fas fa-plus"></i></a>
+        <div class="mt-2">
+            <a class="text-reset" href="{% url 'create_customer' %}">Add Customer<i class="mx-1 fas fa-plus"></i></a>
         </div>
         {% for customer in customer_list %}
-            <div class="row mt-1">
+            <div class="row pt-1 mt-2">
                 <div class="btn-group btn-group">
                     <a href="{% url 'detail_customer' customer.id %}"><button class="btn btn-primary mx-2">Details</button></a>
                     <a href="{% url 'update_customer' customer.id %}"><button class="btn btn-warning mx-2">Edit</button></a>

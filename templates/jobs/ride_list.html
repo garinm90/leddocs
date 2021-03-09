@@ -13,11 +13,11 @@
         </div>
     </div>
     <div class="col-md-8">
-        <div class="d-flex align-items-center">
-            <a class="mx-1 text-reset pt-3" href="{% url 'create_ride' %}">Add Ride<i class="mx-1 fas fa-plus"></i></a>
+        <div class="mt-2">
+            <a class="text-reset" href="{% url 'create_ride' %}">Add Ride<i class="mx-1 fas fa-plus"></i></a>
         </div>
         {% for ride in ride_list %}
-            <div class="row mt-1">
+            <div class="row pt-1 mt-2">
                 <div class="btn-group btn-group">
                     <a href="{% url 'detail_ride' ride.id %}"><button class="btn btn-primary mx-1">Details</button></a>
                     <a href="{% url 'update_ride' ride.id %}"><button class="btn btn-warning mx-1">Edit</button></a>

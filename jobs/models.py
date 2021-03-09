@@ -37,7 +37,7 @@ class Ride(models.Model):
     ride_name = models.CharField(max_length=50)
     manufacturer = models.CharField(max_length=50)
     alternate_name = models.CharField(max_length=50, blank=True)
-    customers = models.ManyToManyField("Customer", related_name="rides")
+    customers = models.ManyToManyField("Customer", related_name="rides", blank=True)
 
     def __str__(self) -> str:
         return self.ride_name
@@ -58,7 +58,7 @@ class Light(models.Model):
 
 
 class LightCount(models.Model):
-    number_of_lights = models.PositiveIntegerField()
+    number_of_lights = models.PositiveIntegerField(null=True)
     light = models.ForeignKey(Light, on_delete=models.SET_NULL, null=True)
     job = models.ForeignKey(Job, on_delete=models.SET_NULL, null=True)
 

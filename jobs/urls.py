@@ -18,10 +18,9 @@ from .views import (
     LightCreateView,
     LightDetailView,
     LightListView,
-    CustomerAutoComplete,
     RideUpdateView,
     ImageCreateView,
-    JobAutoComplete,
+    add_customer_rides,
 )
 
 router = routers.SimpleRouter()
@@ -44,14 +43,9 @@ urlpatterns = [
     ),
     path("customers", CustomerListView.as_view(), name="list_customers"),
     path("customer/new", CustomerCreateView.as_view(), name="create_customer"),
+    path("customer/rides/<int:pk>", add_customer_rides, name="add_customer_rides"),
     path("light/<int:pk>", LightDetailView.as_view(), name="detail_light"),
     path("lights", LightListView.as_view(), name="list_lights"),
     path("light/new", LightCreateView.as_view(), name="create_light"),
-    path(
-        "customer/autocomplete",
-        CustomerAutoComplete.as_view(),
-        name="autocomplete_customer",
-    ),
-    path("job/autocomplete", JobAutoComplete.as_view(), name="autocomplete_job"),
     path("upload/", ImageCreateView.as_view(), name="upload_image"),
 ]

@@ -1,0 +1,15 @@
+<nav class="navbar navbar-light navbar-expand-lg">
+    <div class="container">
+        <a href="{% url 'index' %}" class="navbar-brand">Denny's Docs</a>
+    
+            <div class="navbar-nav">
+                <a {% if request.resolver_match.url_name == 'index' %}class="nav-link active" aria-current="page"{% else %}class="nav-link"{% endif %}  href="{% url 'index' %}">Home</a>
+                <a {% if request.resolver_match.url_name == 'list_customers' %}class="nav-link active" aria-current="page"{% else %}class="nav-link "{% endif %} href="{% url 'list_customers' %}">Customers</a>
+                <a {% if request.resolver_match.url_name == 'list_rides' %}class="nav-link active" aria-current="page"{% else %}class="nav-link "{% endif %} href="{% url 'list_rides' %}">Rides</a>
+                <a {% if request.resolver_match.url_name == 'list_jobs' %}class="nav-link active" aria-current="page"{% else %}class="nav-link "{% endif %} href="{% url 'list_jobs' %}">Jobs</a>
+                <a {% if request.resolver_match.url_name == 'list_lights' %}class="nav-link active" aria-current="page"{% else %}class="nav-link "{% endif %} href="{% url 'list_lights' %}">Lights </a>
+
+
+
+    </div>
+</nav>

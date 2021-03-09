@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+
+{% block content %}
+{% comment %} {{ ride }} {% endcomment %}
+{% crispy form %}
+
+   <button type="submit" class="btn mt-2 btn-primary">Submit</button>
+
+
+
+{% endblock content %}
+
+{% block javascript %}
+<script>
+    $(document).ready(function() {
+    $('#id_rides').select2();
+
+    $("button").click(function() {
+           $("form").submit();
+       });
+});
+</script>
+{% endblock javascript %}

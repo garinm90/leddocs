@@ -1,20 +1,14 @@
 from django.urls import reverse_lazy
-from django.http import HttpResponseRedirect
 from django.views.generic.base import RedirectView
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.shortcuts import redirect, render
+from django.core import serializers
 
-from dal.autocomplete import Select2QuerySetView
 from rest_framework import viewsets
 
-from .serializers import (
-    JobSerializer,
-    RideSerializer,
-    CustomerSerializer,
-    LightSerializer,
-    ImageSerializer,
-)
+from .serializers import JobSerializer
 from .models import Job, Customer, Ride, Light, LightCount, Image
-from .forms import JobForm, ImageForm
+from .forms import CustomerRideForm, JobForm, ImageForm
 
 
 class JobViewSet(viewsets.ModelViewSet):
@@ -44,30 +38,11 @@ class JobListView(ListView):
 
 class JobCreateView(CreateView):
     model = Job
-    # fields = "__all__"
     form_class = JobForm
-
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['formset'] = JobImageFormSet()
-    #     return context
-
-    # def post(self, request, *args, **kwargs):
-    #     formset = JobImageFormSet(request.POST)
-    #     form = self.get_form(JobForm)
-    #     if formset.is_valid() and form.is_valid():
-    #         return self.form_valid(formset,form)
-
-    # def form_valid(self, form, formset,):
-    #     object = form.save()
-    #     formset.instance = self.object
-    #     formset.save()
-    #     return HttpResponseRedirect('/jobs/')
 
 
 class JobUpdateView(UpdateView):
     model = Job
-    # fields = "__all__"
     form_class = JobForm
 
 
@@ -134,26 +109,24 @@ class LightListView(ListView):
     model = Light
 
 
-class CustomerAutoComplete(Select2QuerySetView):
-    def get_queryset(self):
-        if not self.request.user.is_authenticated:
-            return Customer.objects.none()
-        qs = Customer.objects.all()
-        if self.q:
-            qs = qs.filter(primary_contact__icontains=self.q)
-        return qs
-
-
-class JobAutoComplete(Select2QuerySetView):
-    def get_queryset(self):
-        if not self.request.user.is_authenticated:
-            return Job.objects.none()
-        qs = Job.objects.all()
-        if self.q:
-            qs = qs.filter(customer__icontains=self.q)
-        return qs
-
-
 class ImageCreateView(CreateView):
     model = Image
     form_class = ImageForm
+
+
+def add_customer_rides(request, pk):
+    customer = Customer.objects.get(pk=pk)
+    form = CustomerRideForm()
+    if request.method == "POST":
+        form = CustomerRideForm(request.POST)
+        rides = form.data.getlist("rides")
+        if len(rides) > 0:
+            for ride in rides:
+                ride = Ride.objects.get(pk=int(ride))
+                customer.rides.add(ride)
+            return redirect(customer)
+
+    rides = serializers.serialize("json", Ride.objects.all())
+    return render(
+        request, "jobs/customer_ride_form.html", {"form": form, "rides": rides}
+    )
